@@ -10,7 +10,7 @@
 | **Title** | Landing Page to Authentication — Luxury Shoes E-commerce |
 | **Status** | `Accepted` |
 | **Date Created** | 2026-08-19 |
-| **Last Updated** | 2026-08-19 |
+| **Last Updated** | 2026-08-21 |
 | **Deciders** | Cain (project owner) |
 | **Consulted** | — |
 | **Informed** | — |
@@ -270,4 +270,50 @@ passing post-upgrade.
 
 **Consequence:** Two-major-version jump absorbed early in project life while
 the surface is small; deferring would have raised migration cost later.
+
+### ADR-002: Deployment Architecture & Backend Foundation (2026-08-21)
+
+**Context / Trigger:** Deployment planning for the storefront. The auth flow is
+currently a client-side demo (fake success, no persistence). Shipping it to real
+users requires a backend; hosting strategy required a decision between
+platform options. Decisions below were confirmed by the project owner on
+2026-08-21 and are recorded here as the authoritative reference; the companion
+`DEPLOYMENT-PLAN.md` holds the operational phasing only.
+
+**Decisions:**
+
+| # | Concern | Decision | Rationale |
+|---|---------|----------|-----------|
+| 1 | Backend stack | **Python + Django** (gunicorn) | Machine-level default: new projects use Django until a module's measured performance requirements justify Rust. Auth workload is trivial; Django provides battle-tested auth hashers, CSRF, sessions, and migrations. Rust explicitly deferred — not reached prematurely |
+| 2 | Hosting — demo | **Cloudflare Pages** (static) + CF Worker `/api/*` proxy → Django container on a free container host | Header control, PR previews, instant rollback. Worker proxy keeps `/api` same-origin so cookie semantics match production exactly |
+| 3 | Hosting — production | **AWS**: CloudFront + S3 (OAC) for static; `/api/*` → ALB → ECS Fargate → RDS PostgreSQL; Secrets Manager; CloudWatch | Production-grade defaults; infrastructure as Terraform modules |
+| 4 | Auth mechanism | Server-side sessions; `HttpOnly; Secure; SameSite=Strict` cookie | Machine `[ABSOLUTE]`: no sensitive data in web storage. Same-origin API makes Strict cookies viable in both environments |
+| 5 | Password hashing | Argon2 | Modern memory-hard default |
+| 6 | API surface | `/api/v1/*`; JSON error envelope mirroring frontend `errors.ts` taxonomy (`VALIDATION`, `AUTHENTICATION`, `AUTHORIZATION`, `NOT_FOUND`, `EXTERNAL_DEPENDENCY`, `INTERNAL`, `RATE_LIMITED`) with retryable flag | Taxonomy parity across the boundary |
+| 7 | Domain | Platform subdomains first (`*.pages.dev`, `*.cloudfront.net`); custom domain later is DNS-only | Defers registrar/DNS work without blocking launch |
+| 8 | Observability | Sentry (front + back) at launch; uptime monitor alerting if down > 5 min; CloudWatch alarms on 5xx rate and p95 latency in prod | Closes the observability gate properly instead of deferring |
+| 9 | CI/CD | GitHub Actions: lint → typecheck → build → secrets scan → deps audit gate; deploys via OIDC (no long-lived AWS keys); branch protection on `main` | Supply-chain hygiene per machine standards |
+
+**Security model notes:** rate limiting on all auth endpoints; generic error
+messages to prevent user enumeration; PII limited to email addresses and never
+logged; all input re-validated server-side regardless of client-side checks.
+
+**Accepted risks / explicit non-goals:**
+- Wishlist and recently-viewed remain client-side (localStorage) — non-sensitive
+  UI state, permitted; persistent wishlist is future scope.
+- Demo backend runs on a free tier — best-effort availability, acceptable for a
+  demo environment only.
+- No custom domain at launch — HSTS preload not applicable until then.
+
+**Consequences:** Phase 5 (AWS/Terraform) dominates the schedule (~1–2 weeks).
+Django choice keeps option open to revisit Rust per-module later without
+re-architecting. Strict CSP becomes achievable once inline style attributes are
+refactored to token-based classes (Phase 0).
+
+**Verification:** each phase carries its own gates (CI green, coverage ≥ 80%,
+post-deploy smoke asserting HTTP 200 on all routes, alarm thresholds defined)
+before the next phase begins.
+
+**References:** machine-root CLAUDE.md technology defaults & security absolutes;
+ADR-001 (vite upgrade precedent for dependency decisions).
 
