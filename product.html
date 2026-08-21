@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATELIER — Product detail">
+  <title>Product — DubeeShoes</title>
+  
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/atoms.css">
+  <link rel="stylesheet" href="src/css/molecules.css">
+  <link rel="stylesheet" href="src/css/organisms.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a href="/" class="header-logo"><img src="/images/logo.jpeg" alt="Atelier" height="40"></a>
+    <button class="header-menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <nav class="header-nav" id="headerNav">
+      <a href="/" class="nav-item" aria-current="page">Home</a>
+      <a href="/catalog.html" class="nav-item">Collection</a>
+      <a href="/#craftsmanship" class="nav-item">Craftsmanship</a>
+    </nav>
+    <div class="header-cta">
+      <a href="login.html" class="btn btn-ghost">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="/" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <a href="/catalog.html" class="breadcrumb-item">Collection</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-item breadcrumb-current" id="breadcrumbProduct">Product</span>
+    </div>
+  </nav>
+
+  <!-- Product Detail -->
+  <main class="product-detail" id="productDetail">
+    <!-- Product Gallery -->
+    <section class="product-gallery">
+      <div class="product-gallery-main" id="galleryMain">
+        <img src="" alt="" id="galleryMainImage" loading="lazy">
+      </div>
+      <div class="product-gallery-thumbs" id="galleryThumbs">
+        <!-- Thumbnails rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Product Info -->
+    <section class="product-info">
+      <div class="product-info-inner">
+        <span class="text-caption" id="productCategory">Category</span>
+        <h1 class="text-h1" id="productName">Product Name</h1>
+        <span class="product-detail-price" id="productPrice">₵0</span>
+        
+        <p class="text-body-lg" id="productDescription">Description</p>
+
+        <!-- Color Selection -->
+        <div class="product-option-group">
+          <span class="product-option-label">Color — <span id="selectedColor">Select</span></span>
+          <div class="product-option-colors" id="colorOptions">
+            <!-- Colors rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Size Selection -->
+        <div class="product-option-group">
+          <div class="product-option-header">
+            <span class="product-option-label">Size</span>
+            <a href="#" class="link">Size Guide</a>
+          </div>
+          <div class="product-option-sizes" id="sizeOptions">
+            <!-- Sizes rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Add to Wishlist -->
+        <button class="btn btn-primary btn-lg" id="addToWishlist">
+          Add to Wishlist
+        </button>
+
+        <!-- Product Meta -->
+        <div class="product-meta">
+          <div class="product-meta-item">
+            <span class="product-meta-label">Material</span>
+            <span class="product-meta-value" id="productMaterial">—</span>
+          </div>
+          <div class="product-meta-item">
+            <span class="product-meta-label">Construction</span>
+            <span class="product-meta-value" id="productConstruction">—</span>
+          </div>
+          <div class="product-meta-item">
+            <span class="product-meta-label">Origin</span>
+            <span class="product-meta-value" id="productOrigin">—</span>
+          </div>
+        </div>
+
+        <!-- Details Accordion -->
+        <div class="product-details-accordion">
+          <button class="product-details-toggle" id="detailsToggle">
+            <span>Product Details</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="product-details-content" id="detailsContent">
+            <ul class="product-details-list" id="productDetails">
+              <!-- Details rendered by JS -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Trust Signals -->
+        <div class="product-trust">
+          <div class="product-trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span>Handcrafted in Accra</span>
+          </div>
+          <div class="product-trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            <span>Complimentary shipping</span>
+          </div>
+          <div class="product-trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="23 4 23 10 17 10"/>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+            </svg>
+            <span>30-day returns</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Recommendations -->
+  <section class="product-recommendations" id="recommendationsSection" style="display: none;">
+    <div class="product-recommendations-inner">
+      <div class="product-recommendations-header">
+        <span class="text-caption">You May Also Like</span>
+        <h2 class="text-h2">Complete the Look</h2>
+        <div class="divider-accent"></div>
+      </div>
+      <div class="product-grid" id="recommendationsGrid">
+        <!-- Recommendations rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Recently Viewed -->
+  <section class="catalog-recent" id="recentSection" style="display: none;">
+    <div class="catalog-recent-inner">
+      <div class="catalog-recent-header">
+        <span class="text-caption">Your History</span>
+        <h2 class="text-h2">Recently Viewed</h2>
+        <div class="divider-accent"></div>
+      </div>
+      <div class="product-grid" id="recentGrid">
+        <!-- Recent products rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-brand-name">DubeeShoes</span>
+        <p class="footer-brand-tagline">
+          Luxury footwear crafted with restraint. Accra, since 2014.
+        </p>
+      </div>
+      <div class="footer-column">
+        <span class="footer-heading">Collection</span>
+        <a href="/catalog.html" class="footer-link">All Shoes</a>
+        <a href="/catalog.html?category=oxfords" class="footer-link">Oxfords</a>
+        <a href="/catalog.html?category=loafers" class="footer-link">Loafers</a>
+        <a href="/catalog.html?category=boots" class="footer-link">Boots</a>
+      </div>
+      <div class="footer-column">
+        <span class="footer-heading">DubeeShoes</span>
+        <a href="#" class="footer-link">Our Story</a>
+        <a href="#" class="footer-link">Craftsmanship</a>
+        <a href="#" class="footer-link">Sustainability</a>
+        <a href="#" class="footer-link">Press</a>
+      </div>
+      <div class="footer-column">
+        <span class="footer-heading">Support</span>
+        <a href="#" class="footer-link">Sizing Guide</a>
+        <a href="#" class="footer-link">Care Instructions</a>
+        <a href="#" class="footer-link">Returns</a>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">&copy; 2026 DubeeShoes. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Pinterest">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.425 1.808-2.425.853 0 1.265.64 1.265 1.408 0 .858-.546 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.282a.3.3 0 0 1 .069.288l-.278 1.133c-.044.183-.145.222-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.527-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Twitter">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+            <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="src/ts/header.ts"></script>
+  <script type="module" src="src/ts/product-detail.ts"></script>
+</body>
+</html>

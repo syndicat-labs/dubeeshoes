@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your DubeeShoes account">
+  <title>Create Account — DubeeShoes</title>
+  
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/atoms.css">
+  <link rel="stylesheet" href="src/css/molecules.css">
+  <link rel="stylesheet" href="src/css/organisms.css">
+</head>
+<body>
+
+  <main class="auth-page">
+    <!-- Form Panel -->
+    <section class="auth-panel">
+      <div class="auth-form-container">
+        <div class="auth-form-header">
+          <a href="/" class="header-logo" style="margin-bottom: var(--space-8);"><img src="/images/logo.jpeg" alt="Atelier" height="40"></a>
+          <span class="text-caption">Begin Your Journey</span>
+          <h1 class="text-h2">Create Account</h1>
+        </div>
+
+        <form class="auth-form" id="registerForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input 
+                type="text" 
+                id="fullName" 
+                name="fullName" 
+                class="input" 
+                placeholder="Your full name"
+                autocomplete="name"
+                required
+              >
+              <span class="form-error" id="fullNameError" aria-live="polite"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="email" class="form-label">Email Address</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="input" 
+                placeholder="your@email.com"
+                autocomplete="email"
+                required
+              >
+              <span class="form-error" id="emailError" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="password" class="form-label">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="input" 
+                placeholder="Minimum 8 characters"
+                autocomplete="new-password"
+                required
+                minlength="8"
+              >
+              <span class="form-error" id="passwordError" aria-live="polite"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                name="confirmPassword" 
+                class="input" 
+                placeholder="Repeat your password"
+                autocomplete="new-password"
+                required
+              >
+              <span class="form-error" id="confirmPasswordError" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            Create Account
+          </button>
+
+          <div class="auth-form-footer">
+            <p class="text-body" style="color: var(--color-text-muted);">
+              Already have an account? 
+              <a href="login.html" class="link" style="color: var(--color-text-primary);">Sign in</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Dark Panel -->
+    <section class="auth-panel auth-panel-dark">
+      <div style="text-align: center; max-width: 400px;">
+        <span class="text-caption" style="color: var(--color-accent);">DubeeShoes</span>
+        <h2 class="text-h2" style="color: var(--color-text-inverse); margin: var(--space-6) 0;">
+          The Quiet Language of Luxury
+        </h2>
+        <p class="text-body-lg" style="color: var(--atelier-silver);">
+          Create an account to access exclusive collections, private viewings, 
+          and personalized recommendations from our atelier.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="src/ts/validation.ts"></script>
+  <script type="module" src="src/ts/auth.ts"></script>
+</body>
+</html>
