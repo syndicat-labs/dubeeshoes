@@ -1,4 +1,4 @@
-# DubeeShoes
+# DuubeeShoes
 
 Luxury footwear storefront — landing page, product catalog, product detail, and
 account flows (sign in / registration). Built as a multi-page Vite application
