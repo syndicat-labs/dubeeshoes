@@ -1,0 +1,95 @@
+/* Atelier Design Tokens — CSS Custom Properties */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ─── Primitive Tokens ─── */
+  --atelier-black: #0a0a0a;
+  --atelier-charcoal: #2d2d2d;
+  --atelier-graphite: #4a4a4a;
+  --atelier-silver: #8a8a8a;
+  --atelier-pearl: #d4d4d4;
+  --atelier-ivory: #f5f5f5;
+  --atelier-white: #fafafa;
+  
+  --atelier-gold: #c9a96e;
+  --atelier-gold-light: #d4b87a;
+  --atelier-gold-dark: #b8944f;
+
+  /* ─── Semantic Tokens: Colour ─── */
+  --color-bg-primary: var(--atelier-white);
+  --color-bg-secondary: var(--atelier-ivory);
+  --color-bg-dark: var(--atelier-black);
+  --color-bg-dark-elevated: var(--atelier-charcoal);
+  
+  --color-text-primary: var(--atelier-black);
+  --color-text-secondary: var(--atelier-graphite);
+  --color-text-muted: var(--atelier-silver);
+  --color-text-inverse: var(--atelier-white);
+  
+  --color-border-primary: var(--atelier-pearl);
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  
+  --color-accent: var(--atelier-gold);
+  --color-accent-hover: var(--atelier-gold-light);
+  --color-accent-active: var(--atelier-gold-dark);
+  
+  --color-success: #2d5016;
+  --color-error: #8b1a1a;
+
+  /* ─── Semantic Tokens: Typography ─── */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-hero: clamp(3rem, 8vw, 6rem);
+  
+  --weight-regular: 400;
+  --weight-medium: 500;
+  
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  
+  --tracking-tight: -0.025em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.2em;
+
+  /* ─── Semantic Tokens: Space ─── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-32: 8rem;
+  --space-section: clamp(4rem, 10vh, 8rem);
+
+  /* ─── Semantic Tokens: Border ─── */
+  --border-thin: 1px;
+  --border-color: var(--color-border-primary);
+  --border-default: var(--border-thin) solid var(--border-color);
+
+  /* ─── Semantic Tokens: Motion ─── */
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --easing-default: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+
+  /* ─── Semantic Tokens: Layout ─── */
+  --max-width-content: 1200px;
+  --gutter: clamp(1.5rem, 4vw, 3rem);
+}
