@@ -1,4 +1,4 @@
-/* Atelier Organisms — Complex components */
+/* DubeeShoes Organisms — Complex components */
 
 /* ─── Header ─── */
 
@@ -158,7 +158,7 @@
   font-size: var(--text-base);
   font-weight: var(--weight-light);
   line-height: var(--leading-relaxed);
-  color: var(--atelier-silver);
+  color: var(--dubee-silver);
   max-width: 500px;
 }
 

@@ -35,7 +35,7 @@ class ProductDetailPage {
   }
 
   private render(): void {
-    document.title = `${this.product.name} — Atelier`;
+    document.title = `${this.product.name} — DubeeShoes`;
     
     const breadcrumb = document.getElementById('breadcrumbProduct');
     if (breadcrumb) breadcrumb.textContent = this.product.name;

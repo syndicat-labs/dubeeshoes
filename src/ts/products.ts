@@ -300,7 +300,7 @@ export function formatPrice(price: number, currency = '₵') {
 
 export function getRecentlyViewed(): string[] {
   try {
-    const stored = localStorage.getItem('atelier-recently-viewed');
+    const stored = localStorage.getItem('dubee-recently-viewed');
     return stored ? JSON.parse(stored) : [];
   } catch {
     return [];
@@ -313,7 +313,7 @@ export function addToRecentlyViewed(productId: string) {
     recent = recent.filter(id => id !== productId);
     recent.unshift(productId);
     recent = recent.slice(0, 6);
-    localStorage.setItem('atelier-recently-viewed', JSON.stringify(recent));
+    localStorage.setItem('dubee-recently-viewed', JSON.stringify(recent));
   } catch {
     // localStorage not available
   }

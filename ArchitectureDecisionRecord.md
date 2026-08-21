@@ -134,7 +134,7 @@ We need to decide the architecture for a landing page that showcases luxury foot
 | Language | TypeScript | Type safety, better IDE support | No |
 | Styling | CSS + Custom Properties | Design token system, no preprocessor needed | No |
 | Routing | Hash-based (`#/login`, `#/register`) | No server needed, works with static hosting | No |
-| Design Language | Atelier (project-restricted) | Luxury shoe brand aesthetic | No |
+| Design Language | DubeeShoes (project-restricted) | Luxury shoe brand aesthetic | No |
 
 ### 6c. Module / Service Boundaries
 - `index.html` — Landing page (hero, features, CTA)

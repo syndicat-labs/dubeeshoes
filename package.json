@@ -1,7 +1,7 @@
 {
-  "name": "atelier-luxury-shoes",
+  "name": "dubeeshoes",
   "version": "1.0.0",
-  "description": "Landing page for luxury shoes business — ATELIER design language",
+  "description": "Landing page for luxury shoes business — DubeeShoes design language",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -1,4 +1,4 @@
-# Atelier — Design Language Declaration
+# DubeeShoes — Design Language Declaration
 
 **Project-restricted.** Not registered as a machine-wide language until further notice.
 
@@ -80,34 +80,34 @@
 
 ```css
 :root {
-  /* Primitive tokens — Atelier palette */
-  --atelier-black: #0a0a0a;
-  --atelier-charcoal: #2d2d2d;
-  --atelier-graphite: #4a4a4a;
-  --atelier-silver: #8a8a8a;
-  --atelier-pearl: #d4d4d4;
-  --atelier-ivory: #f5f5f5;
-  --atelier-white: #fafafa;
-  --atelier-pure-white: #ffffff;
+  /* Primitive tokens — DubeeShoes palette */
+  --dubee-black: #0a0a0a;
+  --dubee-charcoal: #2d2d2d;
+  --dubee-graphite: #4a4a4a;
+  --dubee-silver: #8a8a8a;
+  --dubee-pearl: #d4d4d4;
+  --dubee-ivory: #f5f5f5;
+  --dubee-white: #fafafa;
+  --dubee-pure-white: #ffffff;
   
   /* Metallic accents */
-  --atelier-gold: #c9a96e;
-  --atelier-gold-light: #d4b87a;
-  --atelier-gold-dark: #b8944f;
+  --dubee-gold: #c9a96e;
+  --dubee-gold-light: #d4b87a;
+  --dubee-gold-dark: #b8944f;
   
   /* Semantic tokens — named by role */
-  --color-bg-primary: var(--atelier-white);
-  --color-bg-secondary: var(--atelier-ivory);
-  --color-bg-dark: var(--atelier-black);
-  --color-text-primary: var(--atelier-black);
-  --color-text-secondary: var(--atelier-graphite);
-  --color-text-muted: var(--atelier-silver);
-  --color-text-inverse: var(--atelier-white);
-  --color-border-primary: var(--atelier-pearl);
+  --color-bg-primary: var(--dubee-white);
+  --color-bg-secondary: var(--dubee-ivory);
+  --color-bg-dark: var(--dubee-black);
+  --color-text-primary: var(--dubee-black);
+  --color-text-secondary: var(--dubee-graphite);
+  --color-text-muted: var(--dubee-silver);
+  --color-text-inverse: var(--dubee-white);
+  --color-border-primary: var(--dubee-pearl);
   --color-border-subtle: rgba(0, 0, 0, 0.08);
-  --color-accent: var(--atelier-gold);
-  --color-accent-hover: var(--atelier-gold-light);
-  --color-accent-active: var(--atelier-gold-dark);
+  --color-accent: var(--dubee-gold);
+  --color-accent-hover: var(--dubee-gold-light);
+  --color-accent-active: var(--dubee-gold-dark);
   
   /* Functional colours — badge-only containment */
   --color-success: #2d5016;
@@ -201,21 +201,21 @@
 
 | Component | Semantic Token | Value Source |
 |---|---|---|
-| Body background | `--color-bg-primary` | `--atelier-white` |
-| Hero background | `--color-bg-dark` | `--atelier-black` |
-| Heading text | `--color-text-primary` | `--atelier-black` |
-| Body text | `--color-text-secondary` | `--atelier-graphite` |
-| Muted text | `--color-text-muted` | `--atelier-silver` |
-| Button background | `--color-accent` | `--atelier-gold` |
-| Button text | `--color-text-inverse` | `--atelier-white` |
-| Input border | `--color-border-primary` | `--atelier-pearl` |
+| Body background | `--color-bg-primary` | `--dubee-white` |
+| Hero background | `--color-bg-dark` | `--dubee-black` |
+| Heading text | `--color-text-primary` | `--dubee-black` |
+| Body text | `--color-text-secondary` | `--dubee-graphite` |
+| Muted text | `--color-text-muted` | `--dubee-silver` |
+| Button background | `--color-accent` | `--dubee-gold` |
+| Button text | `--color-text-inverse` | `--dubee-white` |
+| Input border | `--color-border-primary` | `--dubee-pearl` |
 | Card border | `--border-subtle` | `1px solid rgba(0,0,0,0.08)` |
 
 ---
 
 ## Namespace
 
-This design language uses the prefix `--atelier-*` for its private primitive tokens.
+This design language uses the prefix `--dubee-*` for its private primitive tokens.
 All component code references only the semantic tokens (`--color-*`, `--font-*`, `--space-*`).
 
 ---
