@@ -50,36 +50,57 @@ gates in order and stops at the first failure:
 ### Usage
 
 Run from the project root (the script resolves paths relative to the working
-directory):
+directory). Every mutating run displays its plan and asks for confirmation
+before touching anything:
 
 ```bash
-npm run deps            # canonical entry point
-bash scripts/deps.sh    # equivalent, works without npm script resolution
-./scripts/deps.sh       # also executable directly (chmod +x already applied)
+npm run deps                    # verify → show plan → confirm → converge
+npm run deps -- --update        # verify → show available updates → confirm →
+                                #   refresh lockfile within semver ranges →
+                                #   re-audit → converge
+npm run deps -- --check-only    # verify & report only; never mutates
+bash scripts/deps.sh            # direct invocation also works (executable)
 ```
+
+### Modes
+
+| Mode          | Mutates lockfile | Installs | Notes                                            |
+|---------------|------------------|----------|--------------------------------------------------|
+| default       | never            | yes      | Converges node_modules to the pinned lockfile    |
+| `--update`    | within semver ranges only | yes | Pending **majors are shown but never auto-applied** |
+| `--check-only`| never            | never    | Safe for CI status checks                        |
+
+### Safety guarantees
+
+- **Confirmation gate:** every install/update prints what it is about to do and
+  waits for explicit `y`. Default answer is no.
+- **Non-interactive refusal:** with no terminal attached (CI), the script
+  refuses rather than guessing; automation must set `DEPS_ASSUME_YES=1`.
+- **Vulnerability refusal with rollback:** in `--update` mode the refreshed
+  tree is re-audited before install; any finding at or above the threshold
+  restores `package-lock.json` byte-for-byte and exits non-zero. Known holes
+  are never installed.
+- **Majors are decisions, not side effects:** `--update` moves only within
+  existing semver ranges; major bumps go through the ADR process.
 
 ### Configuration
 
-| Variable           | Default | Effect                                                    |
-|--------------------|---------|-----------------------------------------------------------|
+| Variable           | Default | Effect                                                        |
+|--------------------|---------|---------------------------------------------------------------|
 | `DEPS_AUDIT_LEVEL` | `high`  | Minimum audit severity that fails the gate (`low`…`critical`) |
 | `DEPS_SKIP_AUDIT`  | unset   | `1` skips the audit step entirely — offline escape hatch only |
-
-```bash
-DEPS_AUDIT_LEVEL=critical npm run deps   # stricter threshold
-DEPS_SKIP_AUDIT=1 npm run deps           # genuinely offline only — do not normalize
-```
+| `DEPS_ASSUME_YES`  | unset   | `1` skips the confirmation prompt — required for non-TTY runs |
 
 ### Exit codes
 
-| Code | Meaning            | Response                                                        |
-|------|--------------------|-----------------------------------------------------------------|
-| `0`  | Success            | —                                                               |
-| `1`  | Toolchain failure  | Install/upgrade Node ≥ 18 or npm ≥ 9                            |
-| `2`  | Lockfile desync    | Intentional change? run `npm install --package-lock-only`       |
-| `3`  | Audit findings     | Resolve vulnerabilities or record an accepted risk in the ADR   |
-| `4`  | Install failure    | Re-run unredirected for full npm output                         |
-| `5`  | Registry unreachable | Fix connectivity before retrying                              |
+| Code | Meaning                          | Response                                                  |
+|------|----------------------------------|-----------------------------------------------------------|
+| `0`  | Success                          | —                                                          |
+| `1`  | Toolchain failure / refused or aborted before any change | Install Node ≥ 18 / npm ≥ 9, or re-run interactively |
+| `2`  | Lockfile desync                  | Intentional change? run `npm install --package-lock-only` |
+| `3`  | Audit findings                   | Resolve vulnerabilities or record an accepted risk in the ADR |
+| `4`  | Install failure                  | Re-run unredirected for full npm output                   |
+| `5`  | Registry unreachable             | Fix connectivity before retrying                          |
 
 
 ## Project structure
