@@ -8,7 +8,7 @@ with a bespoke, project-restricted design language.
 
 | Layer      | Choice                                            |
 |------------|---------------------------------------------------|
-| Build/dev  | Vite 5                                            |
+| Build/dev  | Vite 8                                            |
 | Language   | TypeScript 5.4 (strict)                           |
 | Runtime    | Vanilla DOM modules — no framework runtime        |
 | Styling    | Custom token system ("DubeeShoes" design language)|
@@ -47,15 +47,40 @@ gates in order and stops at the first failure:
 3. **Security audit** — fails on vulnerabilities at or above `high` by default.
 4. **Reproducible install** — `npm ci` only; never bare `npm install`.
 
-Exit codes: `0` ok · `1` toolchain · `2` lockfile sync · `3` audit findings ·
-`4` install failure · `5` registry unreachable.
+### Usage
 
-Knobs:
+Run from the project root (the script resolves paths relative to the working
+directory):
 
 ```bash
-DEPS_AUDIT_LEVEL=critical npm run deps   # raise audit threshold
-DEPS_SKIP_AUDIT=1 npm run deps           # offline escape hatch — use sparingly
+npm run deps            # canonical entry point
+bash scripts/deps.sh    # equivalent, works without npm script resolution
+./scripts/deps.sh       # also executable directly (chmod +x already applied)
 ```
+
+### Configuration
+
+| Variable           | Default | Effect                                                    |
+|--------------------|---------|-----------------------------------------------------------|
+| `DEPS_AUDIT_LEVEL` | `high`  | Minimum audit severity that fails the gate (`low`…`critical`) |
+| `DEPS_SKIP_AUDIT`  | unset   | `1` skips the audit step entirely — offline escape hatch only |
+
+```bash
+DEPS_AUDIT_LEVEL=critical npm run deps   # stricter threshold
+DEPS_SKIP_AUDIT=1 npm run deps           # genuinely offline only — do not normalize
+```
+
+### Exit codes
+
+| Code | Meaning            | Response                                                        |
+|------|--------------------|-----------------------------------------------------------------|
+| `0`  | Success            | —                                                               |
+| `1`  | Toolchain failure  | Install/upgrade Node ≥ 18 or npm ≥ 9                            |
+| `2`  | Lockfile desync    | Intentional change? run `npm install --package-lock-only`       |
+| `3`  | Audit findings     | Resolve vulnerabilities or record an accepted risk in the ADR   |
+| `4`  | Install failure    | Re-run unredirected for full npm output                         |
+| `5`  | Registry unreachable | Fix connectivity before retrying                              |
+
 
 ## Project structure
 
