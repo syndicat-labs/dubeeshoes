@@ -1,0 +1,87 @@
+# DubeeShoes
+
+Luxury footwear storefront — landing page, product catalog, product detail, and
+account flows (sign in / registration). Built as a multi-page Vite application
+with a bespoke, project-restricted design language.
+
+## Stack
+
+| Layer      | Choice                                            |
+|------------|---------------------------------------------------|
+| Build/dev  | Vite 5                                            |
+| Language   | TypeScript 5.4 (strict)                           |
+| Runtime    | Vanilla DOM modules — no framework runtime        |
+| Styling    | Custom token system ("DubeeShoes" design language)|
+
+## Prerequisites
+
+- Node.js ≥ 18
+- npm ≥ 9
+
+## Quick start
+
+```bash
+npm run deps     # check toolchain → verify lockfile → security audit → clean install
+npm run dev      # start the dev server
+```
+
+## Scripts
+
+| Script              | Purpose                                              |
+|---------------------|------------------------------------------------------|
+| `npm run deps`      | Dependency bootstrap (see policy below)              |
+| `npm run dev`       | Vite dev server                                      |
+| `npm run build`     | Production build to `dist/`                          |
+| `npm run preview`   | Serve the production build locally                   |
+| `npm run typecheck` | `tsc --noEmit`                                       |
+| `npm run lint`      | ESLint over `src/` *(requires adding eslint as a devDependency)* |
+
+## Dependency policy
+
+Installs are **lockfile-driven and fail-closed**. `scripts/deps.sh` runs four
+gates in order and stops at the first failure:
+
+1. **Toolchain** — node/npm present, minimum versions met (`engines` in package.json).
+2. **Lockfile sync** — `package-lock.json` must satisfy `package.json`
+   (`npm ci --dry-run`). Desync exits with instructions to regenerate.
+3. **Security audit** — fails on vulnerabilities at or above `high` by default.
+4. **Reproducible install** — `npm ci` only; never bare `npm install`.
+
+Exit codes: `0` ok · `1` toolchain · `2` lockfile sync · `3` audit findings ·
+`4` install failure · `5` registry unreachable.
+
+Knobs:
+
+```bash
+DEPS_AUDIT_LEVEL=critical npm run deps   # raise audit threshold
+DEPS_SKIP_AUDIT=1 npm run deps           # offline escape hatch — use sparingly
+```
+
+## Project structure
+
+```
+├── index.html            # Landing page
+├── catalog.html          # Product catalog
+├── product.html          # Product detail shell
+├── login.html            # Sign in
+├── register.html         # Create account
+├── public/images/        # Static imagery (served verbatim)
+├── src/
+│   ├── css/              # Design language: tokens → reset → atoms → molecules → organisms
+│   └── ts/               # App modules: errors (taxonomy), auth, validation, products…
+├── scripts/deps.sh       # Dependency check / verify / install
+└── dist/                 # Build output — generated, never committed
+```
+
+## Design language
+
+The visual system is declared in [`src/css/design-language.md`](src/css/design-language.md):
+primitive tokens (`--dubee-*`) resolve into role-named semantic tokens
+(`--color-*`, `--font-*`, `--space-*`); component code references semantic
+tokens only.
+
+## Notes
+
+- Private project — not published to npm (`"private": true`).
+- Client-side validation and auth here are UX-layer only; any real backend must
+  re-validate everything at its own boundary.
