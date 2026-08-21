@@ -2,10 +2,11 @@
  * Product Detail Module — Single product view
  */
 
+import type { Product, ProductColor } from './products';
 import { getProductById, getRecommendedProducts, formatPrice, getRecentlyViewed, addToRecentlyViewed } from './products';
 
 class ProductDetailPage {
-  private product: any = null;
+  private product!: Product;
   private selectedColor: string = '';
 
   constructor() {
@@ -21,12 +22,12 @@ class ProductDetailPage {
       return;
     }
 
-    this.product = getProductById(productId);
-    
-    if (!this.product) {
+    const product = getProductById(productId);
+    if (!product) {
       window.location.href = '/catalog.html';
       return;
     }
+    this.product = product;
 
     addToRecentlyViewed(productId);
     this.render();
@@ -72,7 +73,7 @@ class ProductDetailPage {
 
     this.selectedColor = this.product.colors[0].name;
     
-    container.innerHTML = this.product.colors.map((color: any, i: number) => `
+    container.innerHTML = this.product.colors.map((color: ProductColor, i: number) => `
       <button 
         class="color-swatch ${i === 0 ? 'active' : ''}" 
         style="background-color: ${color.hex}"
@@ -134,7 +135,7 @@ class ProductDetailPage {
 
     section.style.display = 'block';
     
-    grid.innerHTML = recommendations.map((product: any) => `
+    grid.innerHTML = recommendations.map((product: Product) => `
       <a href="/product.html?id=${product.id}" class="product-card-link">
         <article class="product-card">
           <div class="product-card-image">
@@ -161,14 +162,14 @@ class ProductDetailPage {
     const recentProducts = recentIds
       .filter((id: string) => id !== this.product.id)
       .map((id: string) => getProductById(id))
-      .filter(Boolean)
+      .filter((p): p is Product => p !== undefined)
       .slice(0, 3);
 
     if (recentProducts.length === 0) return;
 
     section.style.display = 'block';
     
-    grid.innerHTML = recentProducts.map((product: any) => `
+    grid.innerHTML = recentProducts.map((product: Product) => `
       <a href="/product.html?id=${product.id}" class="product-card-link">
         <article class="product-card">
           <div class="product-card-image">

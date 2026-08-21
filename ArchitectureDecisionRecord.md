@@ -251,3 +251,23 @@ We need to decide the architecture for a landing page that showcases luxury foot
 ## 14. Notes & Open Questions
 
 - None at time of writing.
+
+## 15. Amendment Log
+
+### ADR-001: Vite major upgrade 5 → 8 (2026-08-21)
+
+**Trigger:** `npm audit` flagged GHSA-67mh-4wv8-2f99 (high) — `esbuild ≤0.24.2`
+(via vite 5.x) allows any website to read responses from the dev server.
+Development-only blast radius, but the project's dependency gate
+(`scripts/deps.sh`) correctly fails closed on it.
+
+**Decision:** Upgrade `vite` to ^8.2.2 rather than accept the risk. Config is a
+plain MPA setup with no deprecated APIs; node ≥22.12 requirement already met.
+
+**Verification:** typecheck, eslint, production build, dev-server smoke test
+(HTTP 200), and full `npm run deps` gate at default `high` audit threshold — all
+passing post-upgrade.
+
+**Consequence:** Two-major-version jump absorbed early in project life while
+the surface is small; deferring would have raised migration cost later.
+

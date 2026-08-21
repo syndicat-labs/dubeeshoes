@@ -2,14 +2,16 @@
  * Auth Module — Login and Register page logic
  */
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { FormValidator } from './validation';
+
+ 
 class AuthPage {
   private form: HTMLFormElement | null;
-  private validator: any;
+  private validator!: FormValidator;
 
   constructor(formId: string) {
     this.form = document.getElementById(formId) as HTMLFormElement | null;
-    this.validator = new (window as any).FormValidator();
+    this.validator = new window.FormValidator();
     this.init();
   }
 
@@ -27,36 +29,36 @@ class AuthPage {
       this.validator.registerField(
         'email',
         'emailError',
-        (window as any).Validators.required('Email'),
-        (window as any).Validators.email()
+        window.Validators.required('Email'),
+        window.Validators.email()
       );
       this.validator.registerField(
         'password',
         'passwordError',
-        (window as any).Validators.required('Password')
+        window.Validators.required('Password')
       );
     } else if (formId === 'registerForm') {
       this.validator.registerField(
         'fullName',
         'fullNameError',
-        (window as any).Validators.required('Name')
+        window.Validators.required('Name')
       );
       this.validator.registerField(
         'email',
         'emailError',
-        (window as any).Validators.required('Email'),
-        (window as any).Validators.email()
+        window.Validators.required('Email'),
+        window.Validators.email()
       );
       this.validator.registerField(
         'password',
         'passwordError',
-        (window as any).Validators.required('Password'),
-        (window as any).Validators.minLength(8)
+        window.Validators.required('Password'),
+        window.Validators.minLength(8)
       );
       this.validator.registerField(
         'confirmPassword',
         'confirmPasswordError',
-        (window as any).Validators.required('Password confirmation')
+        window.Validators.required('Password confirmation')
       );
     }
   }
@@ -88,7 +90,7 @@ class AuthPage {
     if (fieldName === 'confirmPassword') {
       const passwordField = this.form?.querySelector('[name="password"]') as HTMLInputElement;
       if (passwordField) {
-        const matchValidator = (window as any).Validators.matchesField(
+        const matchValidator = window.Validators.matchesField(
           'password',
           passwordField.value
         );

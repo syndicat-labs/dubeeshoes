@@ -2,7 +2,7 @@
  * Catalog Module — Product grid rendering and filtering with inline expansion
  */
 
-import { Products, ProductCategories, getProductById, getProductsByCategory, formatPrice, getRecentlyViewed, addToRecentlyViewed } from './products';
+import { Products, ProductCategories, getProductById, getProductsByCategory, formatPrice, getRecentlyViewed, addToRecentlyViewed, type Product } from './products';
 
 class CatalogPage {
   private currentCategory: string = 'all';
@@ -110,14 +110,14 @@ class CatalogPage {
 
     const recentProducts = recentIds
       .map((id: string) => getProductById(id))
-      .filter(Boolean)
+      .filter((p): p is Product => p !== undefined)
       .slice(0, 3);
 
     if (recentProducts.length === 0) return;
 
     section.style.display = 'block';
     
-    grid.innerHTML = recentProducts.map((product: any) => `
+    grid.innerHTML = recentProducts.map((product: Product) => `
       <article class="product-card" data-product-id="${product.id}">
         <div class="product-card-image">
           <img src="${product.images[0]}" alt="${product.name}" loading="lazy">

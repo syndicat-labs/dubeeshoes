@@ -34,7 +34,7 @@ npm run dev      # start the dev server
 | `npm run build`     | Production build to `dist/`                          |
 | `npm run preview`   | Serve the production build locally                   |
 | `npm run typecheck` | `tsc --noEmit`                                       |
-| `npm run lint`      | ESLint over `src/` *(requires adding eslint as a devDependency)* |
+| `npm run lint`      | ESLint (flat config, `typescript-eslint` recommended) |
 
 ## Dependency policy
 

@@ -2,12 +2,12 @@
  * Products Data Layer — Product catalog data and utilities
  */
 
-interface ProductColor {
+export interface ProductColor {
   name: string;
   hex: string;
 }
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   category: string;

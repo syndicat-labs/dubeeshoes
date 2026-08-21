@@ -2,16 +2,16 @@
  * Validation Module — Form validation using the error taxonomy
  */
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 type ValidationResult = {
   valid: boolean;
   errors: string[];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 type FieldValidator = (value: string) => ValidationResult;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 const Validators = {
   required(fieldName: string): FieldValidator {
     return (value: string): ValidationResult => {
@@ -63,8 +63,7 @@ const Validators = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-class FormValidator {
+export class FormValidator {
   private fields: Map<string, FieldValidator[]> = new Map();
   private errorElements: Map<string, HTMLElement> = new Map();
 
@@ -132,8 +131,15 @@ class FormValidator {
   }
 }
 
-// Export for use in other modules
+// Exposed on window because auth pages consume these from a separate entry bundle.
+declare global {
+  interface Window {
+    Validators: typeof Validators;
+    FormValidator: typeof FormValidator;
+  }
+}
+
 if (typeof window !== 'undefined') {
-  (window as any).Validators = Validators;
-  (window as any).FormValidator = FormValidator;
+  window.Validators = Validators;
+  window.FormValidator = FormValidator;
 }
